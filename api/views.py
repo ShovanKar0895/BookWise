@@ -9,5 +9,5 @@ from api.models import BookModel
 @api_view(['GET'])
 def fetchBooks(request):
 
-    books_list = BookModel.objects.filter(title='To Kill a Mockingbird')
+    books_list = BookModel.objects.filter(title='The Odyssey')
     return JsonResponse(books_list[0].author,safe=False)
