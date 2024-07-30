@@ -3,5 +3,5 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-     path('books',views.fetchBooks,name='login'),
+     path('books',views.manageBooks,name='books'),
 ]
