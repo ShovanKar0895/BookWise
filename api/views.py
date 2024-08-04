@@ -19,7 +19,19 @@ def manageBooks(request):
         return Response(serializer.data)
     
     elif request.method == 'POST':
-        serializer = BookModelerializer(data=request.data)
+
+        data = request.data.copy() 
+
+        if 'keywords' in data:
+            keywords = data['keywords']
+            
+            if isinstance(keywords, str):  # If 'keywords' is a string
+                data['keywords'] = [keyword.strip() for keyword in keywords.split(',') if keyword.strip()]
+            elif isinstance(keywords, list):  # If 'keywords' is already a list
+                data['keywords'] = [keyword.strip() for keyword in keywords if isinstance(keyword, str) and keyword.strip()]
+
+            
+        serializer = BookModelerializer(data=data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
