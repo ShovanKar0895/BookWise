@@ -9,12 +9,11 @@ class BookModel(models.Model):
     class StatusType(models.TextChoices):
         INACTIVE = "0", "Inactive"
         ACTIVE = "1", "Active"
-        DELETED = "5", "Deleted"
 
     _id = models.ObjectIdField()
     title = models.CharField(max_length=150)
     author = models.TextField(max_length=200)
-    isbn = models.CharField(max_length=100)
+    isbn = models.CharField(max_length=100,unique=True)
     published_date = models.PositiveBigIntegerField()
     genre = models.TextField(max_length=50)
     description = models.TextField(max_length=1000,null=True)
